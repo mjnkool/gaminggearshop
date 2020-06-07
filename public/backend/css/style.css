@@ -43,6 +43,17 @@ body a:hover{
     -o-transition:all .3s ease-in-out;
     transition:all .3s ease-in-out;
 }
+span.fa.fa-thumbs-up {
+    color: green;
+    font-size: 28px;
+}
+span.fa.fa-thumbs-down {
+    color: red;
+    font-size: 28px;
+}
+a.active.styling-edit {
+    font-size: 20px;
+}
 #sidebar ul li {
     position: relative;
 }
