@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+
+session_start();
 
 class HomeController extends Controller
 {
     public function index(){
-        return view('pages.home');
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderBy('category_id', 'desc')->get();
+        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderBy('brand_id', 'desc')->get();
+        return view('pages.home')
+        ->with('category', $cate_product)
+        ->with('brand', $brand_product);
     }
 }
