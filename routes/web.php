@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
 
+//Danh muc san pham trang chu
+Route::get('/danh-muc-san-pham/{category_id}', 'CategoryProduct@show_category_home');
+Route::get('/thuong-hieu-san-pham/{brand_id}', 'BrandProduct@show_brand_home');
+Route::get('/chi-tiet-san-pham/{product_id}', 'ProductController@details_product');
+
 // Backend
 Route::get('/admin', 'AdminController@index');
 Route::get('/dashboard', 'AdminController@show_dashboard');
@@ -57,3 +62,17 @@ Route::get('/unactive-product/{product_id}', 'ProductController@unactive_product
 
 Route::post('/save-product', 'ProductController@save_product');
 Route::post('/update-product/{product_id}', 'ProductController@update_product');
+
+//Cart
+Route::post('/save-cart','CartController@save_cart');
+Route::get('/show-cart','CartController@show_cart');
+Route::get('/delete-to-cart/{rowId}','CartController@delete_to_cart');
+Route::post('/update-cart-quantity','CartController@update_cart_quantity');
+
+
+//Checkout
+Route::get('/login-checkout', 'CheckoutController@login_checkout');
+Route::post('/add-customer','CheckoutController@add_customer');
+Route::get('/checkout', 'CheckoutController@checkout');
+Route::post('/save-checkout-customer','CheckoutController@save_checkout_customer');
+Route::post('/login-customer','CheckoutController@login_customer');

@@ -92,11 +92,41 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+								<li><a href="#"><i class="fa fa-star"></i> Yêu thích</a></li>
+								<?php
+								$customer_id = Session()->get('customer_id');
+								if ($customer_id != NULL) {
+
+								?>
+									<li><a href="{{URL::to('checkout')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
+
+								<?php
+								} else {
+								?>
+									<li><a href="{{URL::to('checkout')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
+								<?php
+								}
+
+								?>
+								
+								<li><a href="{{URL::to('show-cart')}}"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
+
+								<?php
+								$customer_id = Session()->get('customer_id');
+								if ($customer_id != NULL) {
+
+								?>
+									<li><a href="{{URL::to('logout-checkout')}}"><i class="fa fa-lock"></i> Đăng xuất</a></li>
+
+								<?php
+								} else {
+								?>
+									<li><a href="{{URL::to('login-checkout')}}"><i class="fa fa-lock"></i> Đăng nhập</a></li>
+								<?php
+								}
+
+								?>
+
 							</ul>
 						</div>
 					</div>
@@ -227,7 +257,7 @@
 							@foreach($category as $key => $cate)
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">{{$cate->category_name}}</a></h4>
+									<h4 class="panel-title"><a href="{{URL::to('/danh-muc-san-pham/'.$cate->category_id)}}">{{$cate->category_name}}</a></h4>
 								</div>
 							</div>
 							@endforeach
@@ -238,8 +268,8 @@
 							<h2>Thương hiệu sản phẩm</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-								@foreach($brand as $key => $brand)
-									<li><a href="#"> <span class="pull-right">(50)</span>{{$brand->brand_name}}</a></li>
+									@foreach($brand as $key => $brand)
+									<li><a href="{{URL::to('/thuong-hieu-san-pham/'.$brand->brand_id)}}"> <span class="pull-right">(50)</span>{{$brand->brand_name}}</a></li>
 									@endforeach
 								</ul>
 							</div>
